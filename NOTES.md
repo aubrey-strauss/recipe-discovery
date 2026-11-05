@@ -53,4 +53,6 @@ Jot things down as they happen. Raw notes are fine.
   Reason: I could see the full component tree working before adding details, and each page could be
   built and tested on its own (using a hardcoded category/ID) before wiring up URLs.
 - **TypeScript:** chose it to catch mistakes with API data (wrong field names, missing values) while coding.
+- **CategoryCard shows the description too:** chose to show name (h2), image, and description on each card, so users know what a category includes before clicking. Passed the whole `category` object as one prop instead of separate props, since the card needs several fields from it. (May shorten long descriptions during styling.)
+- **Loading/error messages as props with defaults:** `Spinner` and `ErrorMessage` take an optional `message` prop with a default, so each page can show a specific message but doesn't have to.
 - **Folder structure:** split code into `pages`, `components`, `hooks`, `context`, and `types` so each kind of code has one home.

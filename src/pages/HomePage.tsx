@@ -44,11 +44,14 @@ function HomePage() {
   return (
     <section>
       <h1>Home Page</h1>
-      <p>Found {categories.length} categories</p>
-      {/* TEMPORARY placeholders: will become one card per category with .map() */}
-      <CategoryCard />
-      <CategoryCard />
-      <CategoryCard />
+      {/* .map() goes through a list one item at a time and turns each item into
+      something new */}
+      {categories.map((category) => (
+        // When the list changes, React uses the keys to tell the cards apart
+        // It has to be unique, which is why we use the ID
+        // the left side is the prop name, and the right side is the variable from .map()
+        <CategoryCard key={category.idCategory} category={category} />
+      ))}
     </section>
   );
 }

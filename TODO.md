@@ -2,6 +2,14 @@
 
 Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: change `[ ]` to `[x]`.
 
+**Goal: finished by Sunday night (due Wednesday).**
+| Day | SBA | Module 10 labs |
+|---|---|---|
+| Thu | Phase 3C | — |
+| Fri (solo work in class) | Phases 4–6 | — |
+| Sat | Phases 7–9 | Lab 1 |
+| Sun | Phases 10–11, submit | Labs 2 & 3 |
+
 **Approach (instructor's guidance): top-down, components first, routes later.**
 1. Build the component structure (App → Navbar → pages → small pieces) as placeholders.
 2. Fill in each page with real data, creating hooks/components as pages need them.
@@ -30,14 +38,14 @@ Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: c
 
 ## Phase 3: Home page (real data)
 ### Part A: Look at the data
-- [ ] Open the categories API link in the browser and look at the shape of the data
-- [ ] Create `types/Category.ts` describing one category
+- [x] Open the categories API link in the browser and look at the shape of the data
+- [x] Create `types/Category.ts` describing one category
 ### Part B: Fetch it
-- [ ] Add `useState` for categories, loading, and error in HomePage
-- [ ] Add `useEffect` that fetches categories when the page first shows
-- [ ] Show `Spinner` while loading and `ErrorMessage` if it fails
-- [ ] Check it: page shows "Found 14 categories"
-- [ ] Commit + push
+- [x] Add `useState` for categories, loading, and error in HomePage
+- [x] Add `useEffect` that fetches categories when the page first shows
+- [x] Show `Spinner` while loading and `ErrorMessage` if it fails
+- [x] Check it: page shows "Found 14 categories"
+- [x] Commit + push
 ### Part C: Show the cards
 - [ ] Give `CategoryCard` a `category` prop (name, image)
 - [ ] Give `Spinner` and `ErrorMessage` props (message text)
