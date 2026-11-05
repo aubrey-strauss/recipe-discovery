@@ -18,16 +18,15 @@ Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: c
 - [x] Fix the black screen (restore full `index.html`)
 - [x] Delete the Vite demo code
 - [x] Create folders: `components/`, `pages/`, `hooks/`, `context/`, `types/`
-- [ ] Delete leftover demo images: `src/assets/hero.png`, `src/assets/vite.svg`
+- [x] Delete leftover demo images: `src/assets/hero.png`, `src/assets/vite.svg`
 - [ ] Commit + push
 
 ## Phase 2: Component structure (placeholders, no routes yet)
-- [ ] Create a branch: `feature/component-structure`
 - [ ] Create page placeholders: HomePage, CategoryPage, RecipeDetailPage, FavoritesPage, SearchPage, NotFoundPage
 - [ ] Create component placeholders: Navbar, CategoryCard, RecipeCard, Spinner, ErrorMessage
 - [ ] Pages use their child components (e.g., HomePage shows a few CategoryCards)
 - [ ] App shows Navbar + all pages stacked (temporary, so you can see the whole tree)
-- [ ] Commit, push, merge into main
+- [ ] Commit + push
 
 ## Phase 3: Home page (real data)
 - [ ] Fetch categories inside HomePage with `useState` + `useEffect`

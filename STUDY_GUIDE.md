@@ -29,6 +29,7 @@ For learning: what words mean, why they're called that, and why we did each step
 | **DevTools / Console** | Browser tools (F12). The Console shows errors in red. | Tools for developers; "console" comes from old computer control panels. |
 | **TypeScript (TS)** | JavaScript plus labels describing what kind of data things are | It adds *types* to JavaScript. |
 | **.tsx** | A TypeScript file that contains JSX (HTML-looking code in React) | TS + JSX = TSX. |
+| **IntelliSense** | VS Code's auto-suggest and auto-complete | "Intelligent" + "sense": it senses what you're probably typing |
 | **Component** | A reusable piece of UI, written as a function that returns JSX | It's a *component* part of the whole page, like a car part. |
 | **SPA** | Single Page Application: one HTML page, React swaps the content | Browser never loads a whole new page. |
 | **Route** | A URL path mapped to a page component | The *route* you travel to reach a page. |
@@ -81,11 +82,14 @@ For learning: what words mean, why they're called that, and why we did each step
 
 
 ### Phase 2: Component structure
-- **Why a branch?** `main` should always be working code. You build a feature on its own branch, and only merge it into `main` when it works. If you break something, `main` is safe. Real teams do this for every feature.
-- **Why `feature/` in the branch name?** Just a label so you can tell what kind of work it is (`feature/`, `fix/`). The `/` is part of the name, not a folder.
+- **Branches:** not used in this project (our class works directly on `main`). Just commit and push after each step that works.
 - **What's a placeholder?** A component that just shows its own name for now. It proves the piece exists and is in the right spot before you spend time on what's inside.
 - **Why build the structure first?** You see the whole "family tree" of the app working before any details. Then you fill in one branch of the tree at a time, and you always know where a new piece fits.
 - **Component tree:** components live inside other components, like boxes in boxes:
+
+  ![Component tree](docs/component-tree.svg)
+
+  Text version:
   ```
   App
   ├── Navbar
@@ -102,8 +106,19 @@ For learning: what words mean, why they're called that, and why we did each step
 - **pages vs components folders:** a *page* is a whole screen (one per URL later). A *component* is a smaller reusable piece used on pages.
 - **Why does RecipeCard get reused?** Category, Favorites, and Search all show lists of recipes. Write the card once, use it in three places. That's the point of components.
 - **Why do files start with a capital letter (`HomePage.tsx`)?** React requires components to start with a capital letter. That's how it tells your components (`<HomePage />`) apart from normal HTML tags (`<div>`). Naming the file the same way keeps it consistent.
+- **Which file imports what?** Rule: **import a component in the file that uses it**, and nowhere else.
+  - App uses Navbar + the 6 pages → App imports those 7.
+  - HomePage uses CategoryCard → HomePage imports CategoryCard.
+  - Category/Favorites/Search pages use RecipeCard → each of them imports RecipeCard.
+  - App doesn't import the cards, because App never uses them directly. Each file only needs to know about its own direct children.
+- **IntelliSense added `import React from "react"` — do I need it?** No. Old React (before v17) needed it in every file. Modern React handles JSX on its own. `ReactDOM` is only needed once, in main.tsx, to start the app (we already use `createRoot` there). Unused imports get flagged by TypeScript, so delete them.
+  - *IntelliSense* = VS Code's auto-suggest/auto-complete. "Intelligent" + "sense": it guesses what you mean. Helpful, but it sometimes guesses wrong or uses old habits, so always read what it adds.
 - **What's `export default`?** It makes the component available to other files. `import HomePage from './pages/HomePage'` grabs it.
 - **What's `<main>`?** An HTML tag meaning "the main content of the page." It's like a `<div>` but tells screen readers and graders what it is (this is called *semantic* HTML: tags that describe their meaning).
+- **`<section>` vs `<div>`:** both are invisible boxes that group things. `<div>` means nothing in particular. `<section>` means "a chunk of content with its own heading," so it fits each page (an `<h1>` + content). Use `<div>` when a box is only for layout/styling.
+  - Semantic tags used so far: `<nav>` (navigation), `<main>` (main content), `<section>` (a headed chunk). "Semantic" = has meaning.
+- **Why 3 CategoryCards?** No special reason. Just placeholder copies to show one component can be reused. In Phase 3 we replace them with `.map()`, which makes one card per category from the API (about 14).
+- **How to read the tree:** a line going down = "is inside of." An arrow to the right = "this page uses that component." Dashed boxes = built but not used until later.
 - **Why stack all pages in App for now?** Temporary, just to see every page render. Routing (Phase 9) will replace this so only one page shows at a time.
 
 ### Phase 9: Routing (notes saved for later)
