@@ -19,21 +19,30 @@ Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: c
 - [x] Delete the Vite demo code
 - [x] Create folders: `components/`, `pages/`, `hooks/`, `context/`, `types/`
 - [x] Delete leftover demo images: `src/assets/hero.png`, `src/assets/vite.svg`
-- [ ] Commit + push
+- [x] Commit + push
 
 ## Phase 2: Component structure (placeholders, no routes yet)
-- [ ] Create page placeholders: HomePage, CategoryPage, RecipeDetailPage, FavoritesPage, SearchPage, NotFoundPage
-- [ ] Create component placeholders: Navbar, CategoryCard, RecipeCard, Spinner, ErrorMessage
-- [ ] Pages use their child components (e.g., HomePage shows a few CategoryCards)
-- [ ] App shows Navbar + all pages stacked (temporary, so you can see the whole tree)
-- [ ] Commit + push
+- [x] Create page placeholders: HomePage, CategoryPage, RecipeDetailPage, FavoritesPage, SearchPage, NotFoundPage
+- [x] Create component placeholders: Navbar, CategoryCard, RecipeCard, Spinner, ErrorMessage
+- [x] Pages use their child components (e.g., HomePage shows a few CategoryCards)
+- [x] App shows Navbar + all pages stacked (temporary, so you can see the whole tree)
+- [x] Commit + push
 
 ## Phase 3: Home page (real data)
-- [ ] Fetch categories inside HomePage with `useState` + `useEffect`
-- [ ] Add loading + error states using `Spinner` and `ErrorMessage`
-- [ ] Write TypeScript types for categories
-- [ ] Pass real category data into `CategoryCard` with props
-- [ ] Commit
+### Part A: Look at the data
+- [ ] Open the categories API link in the browser and look at the shape of the data
+- [ ] Create `types/Category.ts` describing one category
+### Part B: Fetch it
+- [ ] Add `useState` for categories, loading, and error in HomePage
+- [ ] Add `useEffect` that fetches categories when the page first shows
+- [ ] Show `Spinner` while loading and `ErrorMessage` if it fails
+- [ ] Check it: page shows "Found 14 categories"
+- [ ] Commit + push
+### Part C: Show the cards
+- [ ] Give `CategoryCard` a `category` prop (name, image)
+- [ ] Give `Spinner` and `ErrorMessage` props (message text)
+- [ ] Replace the 3 placeholder cards with `.map()` over the real categories
+- [ ] Commit + push
 
 ## Phase 4: Category page (real data)
 - [ ] Fetch recipes for one category (hardcoded `"Seafood"` for now; routes come later)

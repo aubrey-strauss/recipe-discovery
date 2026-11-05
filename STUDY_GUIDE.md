@@ -19,6 +19,8 @@ For learning: what words mean, why they're called that, and why we did each step
 | **Branch** | A separate line of work so you can try things without breaking main | Like a tree branch growing off the trunk (`main`). |
 | **Directory** | A folder | Older computer word: a *directory* lists files, like a phone directory. |
 | **`cd` / `mkdir` / `rm`** | Change directory / make directory / remove (delete) | Short for exactly what they do. |
+| **`touch`** | Bash command that creates a new, empty file (`touch src/types/Category.ts`) | Its original job is to "touch" a file (update its last-changed time without changing it). If the file doesn't exist, it creates it. |
+| **`ls`** | Bash command that lists what's inside a folder | Short for "list" |
 | **npm** | Node Package Manager: downloads code libraries other people wrote | It manages "packages" (bundles of code). |
 | **package.json** | The project's ID card: name, scripts, list of libraries it needs | It describes the *package* (your project). |
 | **node_modules** | The folder where npm puts downloaded libraries. Huge. Never commit it. | The modules Node uses. |
@@ -121,7 +123,50 @@ For learning: what words mean, why they're called that, and why we did each step
 - **How to read the tree:** a line going down = "is inside of." An arrow to the right = "this page uses that component." Dashed boxes = built but not used until later.
 - **Why stack all pages in App for now?** Temporary, just to see every page render. Routing (Phase 9) will replace this so only one page shows at a time.
 
+### Phase 3: Home page (real data)
+- **API response shape:** `categories.php` sends back an object with ONE key, `categories`, holding a list (array) of category objects. So the list is at `data.categories`, not `data`.
+- **Why the weird names (`strCategory`, `idCategory`)?** TheMealDB's creator put the type at the front: `str` = string (text), `id` = identifier. It's an old naming habit. We use their names exactly so the data matches.
+- **What's an `interface`?** A TypeScript description of what an object looks like: which fields it has and what type each one is. It doesn't do anything when the app runs. It just lets VS Code warn you if you misspell a field or use one that doesn't exist.
+- **Why `import type`?** It tells TypeScript "this import is only a type description, not real code." Types get erased when the app runs, so this keeps the final app clean. Our project settings require it for types.
+- **`useState`:** gives a component a memory. `const [categories, setCategories] = useState<Category[]>([])` means:
+  - `categories` = the current value (starts as an empty list `[]`)
+  - `setCategories` = the function you call to change it. Changing it makes React redraw the page.
+  - `<Category[]>` = "this will hold a list of Category objects" (`[]` after a type = list of them)
+  - Called "state" because it's the current *state* (condition) of the component.
+- **The 3 statuses of a fetch (restaurant ticket version):** pending/cooking = **loading** → show `Spinner`. Something went wrong = **error** → show `ErrorMessage`. Complete = **success** → show the real content.
+  - Note: "404" is one specific kind of error ("not found"). Errors can also be no internet, server down (500), etc. So we call it "error" in general.
+- **Why three pieces of state (data, loading, error)?** A fetch has 3 possible situations: still waiting, it failed, or it worked. Each one needs different things on screen.
+- **`useEffect`:** runs code *after* the component shows on screen. Used for "side effects" — things outside drawing the page, like fetching data. ("Effect" = a side effect.)
+  - The `[]` at the end is the **dependency array**: the list of values that should make the effect run again when they change. Empty = run only once, when the page first appears.
+- **`async` / `await`:** fetching takes time. `await` means "wait here until this finishes, then continue." A function that uses `await` must be marked `async`.
+- **`try` / `catch` / `finally`:** `try` = attempt this. `catch` = if anything goes wrong, run this instead (so the app doesn't crash). `finally` = run this no matter what (turn loading off either way).
+- **Why check `response.ok`?** `fetch` only fails by itself if there's no internet. If the server answers "error 500," fetch still thinks it worked. `response.ok` is true only for good answers, so we throw our own error for bad ones.
+- **Why `err instanceof Error`?** In JavaScript *anything* can be thrown (`throw "oops"`, `throw 42`), so TypeScript marks a caught error as `unknown`. `instanceof` checks "is it a real Error object?" before reading `.message`. ("Instance" = one of; "is err one of the Error kind?")
+- **Why `err.message` instead of a hardcoded message?** It shows the *real* reason it failed (no internet, bad status), which helps users and debugging. A hardcoded message hides the cause.
+- **Ternary operator `a ? b : c`:** a one-line if/else. "Is a true? If yes → b, otherwise → c." "Ternary" = three parts.
+  - `setError(err instanceof Error ? err.message : "An unknown error occurred")`
+- **Shadowing:** giving an inner variable the same name as an outer one (e.g., naming the caught error `error` when there's already an `error` state). The inner one "casts a shadow" over the outer one, hiding it inside that block. It works, but it's confusing to read. Use a different name like `err`.
+- **Props ("properties"):** how a parent hands information INTO a child component. Like writing details on a ticket for the kitchen. Same idea as HTML attributes (`<img src="..." />`).
+  - Parent passes: `<ErrorMessage message={error} />` — curly braces pass the variable's *value*; quotes would pass the literal word.
+  - Child describes what it accepts with an interface named `ComponentNameProps`: `interface ErrorMessageProps { message?: string }`
+  - Child receives: `function ErrorMessage({ message }: ErrorMessageProps)`
+- **Destructuring `{ message }`:** unpacking just the item you need from the props "box" so you can write `message` instead of `props.message`.
+- **Optional prop `?`:** `message?: string` means the parent *may* leave it out. If they do, it's `undefined` (empty).
+- **Default value:** `{ message = "Something went wrong" }` = "if no message was passed, use this instead." Pairs well with an optional prop.
+- **Test the error state on purpose:** misspell the API URL, save, see if ErrorMessage shows. Then fix it. (Proves your error handling actually works.)
+- **Early return:** `if (loading) return <Spinner />` stops the function there and shows only the spinner. The rest only runs when loading is done and there's no error.
+- **Why does the fetch run twice in the Network tab?** `<StrictMode>` in main.tsx runs effects twice in development on purpose, to help catch bugs. It doesn't happen in the real (built) app. Normal.
+
 ### Phase 9: Routing (notes saved for later)
+- **My list of places a user can go (Aubrey's brainstorm → becomes the routes):**
+  | What the user is doing | Page | URL (route) |
+  |---|---|---|
+  | Being at the home page / looking at categories | HomePage | `/` |
+  | Looking at the recipes in a category | CategoryPage | `/category/:categoryName` |
+  | Reading recipe details | RecipeDetailPage | `/recipe/:recipeId` |
+  | Looking at the favorites page | FavoritesPage | `/favorites` |
+  | Typing in the nav bar → searching for a recipe | Navbar → SearchPage | `/search?query=...` |
+  | Going somewhere that doesn't exist | NotFoundPage | `*` (anything else) |
 - **Why `BrowserRouter` goes in main.tsx?** It has to wrap the *whole* app so every component can use routing. main.tsx is the very top. "Browser" because it uses the browser's real address bar.
 - **`Routes` and `Route`:** `Routes` looks at the current URL and picks the ONE `Route` that matches. Each `Route` says "this path → show this component."
 - **What's `:categoryName`?** The colon means "this part of the URL is a variable." `/category/Seafood` and `/category/Dessert` both match `/category/:categoryName`. That's a **dynamic route**. `/favorites` is a **static route** (always the same). We read the variable with `useParams` ("params" = parameters, the variable pieces of the URL).
