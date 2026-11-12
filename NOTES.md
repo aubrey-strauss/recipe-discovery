@@ -45,6 +45,8 @@ Jot things down as they happen. Raw notes are fine.
   *whole* `index.html` with just the `<title>` line. That deleted `<div id="root">` (where React draws
   the app) and the `<script>` tag that loads React, so the browser had nothing to show.
   Fix: restored the full `index.html`. Lesson: when told to change one line, change only that line.
+- Phase 4: the Seafood API data had 5 fields per meal, not the 3 I was told (`strArea`, `strCountry` were new, and `strArea` was `null`).
+  Lesson: the real data is the source of truth. Look at it in the browser before writing the type.
 
 ### Design decisions
 - **Top-down build order, components first, routes last** (instructor's guidance): built the whole

@@ -151,11 +151,19 @@ For learning: what words mean, why they're called that, and why we did each step
   - Child describes what it accepts with an interface named `ComponentNameProps`: `interface ErrorMessageProps { message?: string }`
   - Child receives: `function ErrorMessage({ message }: ErrorMessageProps)`
 - **Destructuring `{ message }`:** unpacking just the item you need from the props "box" so you can write `message` instead of `props.message`.
+- **Quotes vs curly braces for props:** quotes `message="Loading categories..."` = plain fixed text. Curly braces `message={error}` = a JavaScript value (variable, number, expression). Use quotes for fixed text, braces for anything else.
+- **`.map()`:** goes through a list one item at a time and turns each item into something new (each category → a `<CategoryCard>`). "Map" = maps each item to a result.
+- **`key`:** React's name tag for each item in a list, so it can tell them apart when the list changes. Must be unique → use the ID. Leaving it out gives a Console warning.
 - **Optional prop `?`:** `message?: string` means the parent *may* leave it out. If they do, it's `undefined` (empty).
 - **Default value:** `{ message = "Something went wrong" }` = "if no message was passed, use this instead." Pairs well with an optional prop.
 - **Test the error state on purpose:** misspell the API URL, save, see if ErrorMessage shows. Then fix it. (Proves your error handling actually works.)
 - **Early return:** `if (loading) return <Spinner />` stops the function there and shows only the spinner. The rest only runs when loading is done and there's no error.
 - **Why does the fetch run twice in the Network tab?** `<StrictMode>` in main.tsx runs effects twice in development on purpose, to help catch bugs. It doesn't happen in the real (built) app. Normal.
+
+### Phase 4: Category page + useFetch
+- **API data can change:** I expected 3 fields per meal from `filter.php`, but the real data had 5 (`strArea` and `strCountry` too). Always check the real data in the browser and build the type from what you see, not from notes or old examples.
+- **`null`:** a value that means "nothing here on purpose." `"strArea": null` means the API knows about the field but has no value for this meal.
+- **`string | null`:** the `|` means "or." So `strArea: string | null` = "this is text OR nothing." It's called a **union type** because it unites two types into one. TypeScript will then remind me to handle the "nothing" case before using it.
 
 ### Phase 9: Routing (notes saved for later)
 - **My list of places a user can go (Aubrey's brainstorm → becomes the routes):**

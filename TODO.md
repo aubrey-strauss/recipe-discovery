@@ -2,20 +2,14 @@
 
 Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: change `[ ]` to `[x]`.
 
-**Goal: finished by Sunday night (due Wednesday).**
-| Day | SBA | Module 10 labs |
-|---|---|---|
-| Thu | Phase 3C | — |
-| Fri (solo work in class) | Phases 4–6 | — |
-| Sat | Phases 7–9 | Lab 1 |
-| Sun | Phases 10–11, submit | Labs 2 & 3 |
-
 **Approach (instructor's guidance): top-down, components first, routes later.**
+
 1. Build the component structure (App → Navbar → pages → small pieces) as placeholders.
 2. Fill in each page with real data, creating hooks/components as pages need them.
 3. Add routing last to connect everything.
 
 ## Phase 0: Setup
+
 - [x] Check Node version
 - [x] Clone the GitHub repo
 - [x] Scaffold a Vite + React + TypeScript project
@@ -23,6 +17,7 @@ Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: c
 - [x] First commit + push
 
 ## Phase 1: Clean up + folders
+
 - [x] Fix the black screen (restore full `index.html`)
 - [x] Delete the Vite demo code
 - [x] Create folders: `components/`, `pages/`, `hooks/`, `context/`, `types/`
@@ -30,6 +25,7 @@ Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: c
 - [x] Commit + push
 
 ## Phase 2: Component structure (placeholders, no routes yet)
+
 - [x] Create page placeholders: HomePage, CategoryPage, RecipeDetailPage, FavoritesPage, SearchPage, NotFoundPage
 - [x] Create component placeholders: Navbar, CategoryCard, RecipeCard, Spinner, ErrorMessage
 - [x] Pages use their child components (e.g., HomePage shows a few CategoryCards)
@@ -37,22 +33,29 @@ Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: c
 - [x] Commit + push
 
 ## Phase 3: Home page (real data)
+
 ### Part A: Look at the data
+
 - [x] Open the categories API link in the browser and look at the shape of the data
 - [x] Create `types/Category.ts` describing one category
+
 ### Part B: Fetch it
+
 - [x] Add `useState` for categories, loading, and error in HomePage
 - [x] Add `useEffect` that fetches categories when the page first shows
 - [x] Show `Spinner` while loading and `ErrorMessage` if it fails
 - [x] Check it: page shows "Found 14 categories"
 - [x] Commit + push
+
 ### Part C: Show the cards
-- [ ] Give `CategoryCard` a `category` prop (name, image)
-- [ ] Give `Spinner` and `ErrorMessage` props (message text)
-- [ ] Replace the 3 placeholder cards with `.map()` over the real categories
-- [ ] Commit + push
+
+- [x] Give `CategoryCard` a `category` prop (name, image)
+- [x] Give `Spinner` and `ErrorMessage` props (message text)
+- [x] Replace the 3 placeholder cards with `.map()` over the real categories
+- [x] Commit + push
 
 ## Phase 4: Category page (real data)
+
 - [ ] Fetch recipes for one category (hardcoded `"Seafood"` for now; routes come later)
 - [ ] Notice the fetch code repeats → pull it into the `useFetch` custom hook
 - [ ] Update HomePage to use `useFetch` too
@@ -60,12 +63,14 @@ Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: c
 - [ ] Commit
 
 ## Phase 5: Recipe detail page (real data)
+
 - [ ] Fetch one recipe with `useFetch` (hardcoded ID `52772` for now)
 - [ ] Turn the 20 ingredient/measure fields into a clean list
 - [ ] Show image, category, area, ingredients, instructions
 - [ ] Commit
 
 ## Phase 6: Favorites (global state)
+
 - [ ] Add a Favorite button on the detail page (not working yet)
 - [ ] Create `useLocalStorage` custom hook
 - [ ] Create `FavoritesContext` + provider (list of IDs, add, remove, isFavorite) using `useLocalStorage`
@@ -73,16 +78,19 @@ Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: c
 - [ ] Commit
 
 ## Phase 7: Favorites page
+
 - [ ] Show each favorited recipe (reuse `RecipeCard`)
 - [ ] Empty-state message
 - [ ] Commit
 
 ## Phase 8: Search page (real data)
+
 - [ ] Fetch search results with `useFetch` (hardcoded `"Arrabiata"` for now)
 - [ ] Handle "no results"
 - [ ] Commit
 
 ## Phase 9: Routing (connect everything)
+
 - [ ] Wrap the app in `BrowserRouter` (main.tsx)
 - [ ] Set up the 5 routes + a catch-all 404 in `App.tsx` (replaces the stacked pages)
 - [ ] Navbar links (`Link`) + search form that navigates to `/search?query=...`
@@ -92,11 +100,13 @@ Just the tasks. The "why" lives in STUDY_GUIDE.md. Check things off as you go: c
 - [ ] Commit
 
 ## Phase 10: Styling + polish
+
 - [ ] Responsive grid (works on phone width)
 - [ ] Consistent look across pages
 - [ ] Commit
 
 ## Phase 11: Submission
+
 - [ ] README.md (description, features, install/run steps)
 - [ ] REFLECTION.md (hardest part + one design decision)
 - [ ] Make sure the repo is public
