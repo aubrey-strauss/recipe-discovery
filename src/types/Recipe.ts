@@ -6,3 +6,7 @@ export interface RecipeSummary {
   strArea: string | null;
   strCountry: string | null;
 }
+
+export interface RecipeResonse {
+  meals: RecipeSummary[] | null;
+}
