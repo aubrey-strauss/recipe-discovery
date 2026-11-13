@@ -66,6 +66,17 @@ Jot things down as they happen. Raw notes are fine.
 - Phase 6: on the Favorites button, I put the add/remove *actions* in the button's label instead of the words.
   Calling a function that changes state while drawing the page causes an endless redraw loop ("Too many re-renders").
   Lesson: `onClick` = what happens on click. Between the tags = the words to show.
+- Phase 7: after the "Too many re-renders" crash, the page kept showing the broken version even after the code was fixed.
+  Lesson: if the code looks right but the page doesn't, refresh (F5) first. Vite's auto-update doesn't always recover from a crash.
+- Phase 7: running `npm run dev` again started a second server on 5174 (then 5175) because the old one was still on 5173.
+  Lesson: run only one dev server. Stop old ones with Ctrl + C (or close VS Code), then start one fresh.
+- Phase 7: "no button, no Teriyaki" was really just "it's at the very bottom." All 6 pages are stacked on one screen
+  until routing, so the detail page sits under ~80 seafood recipes. Lesson: Ctrl + F to find things. This is also why routing matters.
+- Phase 7: favorites saved in one browser didn't show in another, or on a different port. localStorage belongs to one browser
+  AND one address, so `localhost:5173` and `localhost:5174` are separate storage boxes.
+- Phase 9: red squiggles on `value={searchText}` because I named the state `SearchText` (capital S). JavaScript is
+  case-sensitive, so those are two different names. Lesson: camelCase for variables, PascalCase only for components.
+- Phase 9: `FormEvent` showed with a line through it, meaning *deprecated* (still works, but outdated). Switched to `SyntheticEvent`.
 
 ### Design decisions
 - **Top-down build order, components first, routes last** (instructor's guidance): built the whole
@@ -90,5 +101,21 @@ Jot things down as they happen. Raw notes are fine.
   (small, never out of date) and saves them with `useLocalStorage`, so favorites survive a refresh. It shares exactly
   4 things: `favorites`, `addFavorite`, `removeFavorite`, `isFavorite`. A `useFavorites()` shortcut hook throws a clear
   error if a page is used outside the Provider.
+- **FavoriteItem component:** favorites only store IDs, so each one needs its own lookup. Hooks can't go inside a `.map()`
+  loop (Rules of Hooks), so I made a small `FavoriteItem` that calls `useFetch` for one ID and reuses `RecipeCard`.
+  It returns nothing (`null`) if a recipe can't be found, so one bad ID doesn't break the page.
+- **Search reuses everything:** search.php sends the same `meals` list as filter.php, so SearchPage reuses `useFetch`,
+  `RecipesResponse`, and `RecipeCard`. It shows a "no recipes found" message when `meals` is null, and uses
+  `encodeURIComponent` so searches with spaces work in the URL.
+- **Routing last, hardcoded values first:** each page was built and tested with a fixed value ("Seafood", "52772",
+  "Arrabiata"), then in Phase 9 each fixed value became one line that reads the URL (`useParams` for `/category/:categoryName`
+  and `/recipe/:recipeId`, `useSearchParams` for `/search?query=`). The pages didn't need any other changes.
+- **Search bar in the Navbar:** the Navbar shows on every page, so search is always available. It's a controlled input
+  plus a form that navigates to `/search?query=...` with `useNavigate`, and it ignores empty searches. Putting the word
+  in the URL means search results can be bookmarked, shared, and refreshed.
+- **Whole cards are links:** CategoryCard and RecipeCard wrap everything in a `Link`, so the picture and name are both
+  clickable. Recipe links use the ID (unique), not the name. Because RecipeCard is reused, the Category, Search, and
+  Favorites pages all became clickable from one change.
+- **404 catch-all:** `path="*"` listed last shows NotFoundPage for any unknown address.
 - **One toggle button:** instead of two buttons, one button flips its words and action based on `isFavorite`.
 - **Folder structure:** split code into `pages`, `components`, `hooks`, `context`, `types`, and `utils` so each kind of code has one home.

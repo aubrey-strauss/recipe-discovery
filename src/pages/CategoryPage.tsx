@@ -3,9 +3,11 @@ import Spinner from "../components/Spinner";
 import ErrorMessage from "../components/ErrorMessage";
 import useFetch from "../hooks/useFetch";
 import type { RecipesResponse } from "../types/Recipe";
+import { useParams } from "react-router-dom";
 
 function CategoryPage() {
-  const categoryName = "Seafood";
+  // Read :categoryName from the address (e.g. /category/Dessert → "Dessert")
+  const { categoryName = "" } = useParams();
   const { data, loading, error } = useFetch<RecipesResponse>(
     `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`, //backticks ` make a template literal, a string with a “fill-in-the-blank”
   );

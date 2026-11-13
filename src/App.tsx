@@ -1,5 +1,4 @@
-// Import a component in the file that uses it. App only uses Navbar and the pages directly.
-// The smaller pieces get imported by the pages that use them:
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import CategoryPage from "./pages/CategoryPage";
@@ -13,13 +12,16 @@ function App() {
     <>
       <Navbar />
       <main>
-        {/* TEMPORARY: showing every page stacked. Routing will replace this later. */}
-        <HomePage />
-        <CategoryPage />
-        <RecipeDetailPage />
-        <FavoritesPage />
-        <SearchPage />
-        <NotFoundPage />
+        <Routes>
+          {/* Routes shows only the ONE page whose path matches the address bar */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/category/:categoryName" element={<CategoryPage />} />
+          <Route path="/recipe/:recipeId" element={<RecipeDetailPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/search" element={<SearchPage />} />
+          {/* * = "anything else," so unknown addresses get the 404 page */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
     </>
   );

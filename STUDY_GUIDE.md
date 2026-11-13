@@ -207,7 +207,35 @@ For learning: what words mean, why they're called that, and why we did each step
 - **"Too many re-renders":** React's error when something changes state *while drawing*, which causes a redraw, which changes state again... forever.
 - **Green "U" in VS Code:** *Untracked*. A new file Git hasn't saved in a commit yet. Goes away after `git add` + commit. (An "M" = Modified.)
 
+### Phase 7: Favorites page
+- **Why a FavoriteItem component?** Hooks can't run inside a loop, because the number of hook calls would change as the list changes. So each favorite gets its own small component, and each one calls `useFetch` once, at its top.
+- **`return null`:** tells React "draw nothing here." Safer than crashing.
+- **`./` vs `../` in imports:** `./` = this same folder; `../` = go up one folder first.
+- **`.length`:** how many items are in a list. `=== 0` means empty.
+- **Port:** the number after `localhost:` (5173). Like an apartment number on one building (your computer). If 5173 is taken, Vite picks the next one (5174...).
+- **Ctrl + C in the terminal:** stops the running program (the dev server). It's not "copy" there.
+- **localStorage is per browser + per address:** a different browser or a different port = a different, empty storage box.
+
+### Phase 8: Search page
+- **`encodeURIComponent(text)`:** makes typed text safe to put in a URL (a space becomes `%20`). URI = Uniform Resource Identifier, the official name for a web address. "Component" = one piece of it.
+- **Empty search results:** TheMealDB sends `meals: null` (not `[]`) when nothing matches, so `?? []` turns that into an empty list we can check with `.length`.
+- **One `<h1>` per page:** the `<h1>` is the page's main title. Screen readers and search engines use it to know what the page is about, so one per page is the good habit (HTML technically allows more). SearchPage has two `<h1>`s in its code, but only one ever shows, because the first `return` stops the function. Right now 6 show at once only because all pages are stacked. Routing fixes that.
+
 ### Phase 9: Routing (notes saved for later)
+- **Routing:** showing a different page for each address (URL), all inside one app. "Route" = a path the user can travel.
+- **`<Routes>` / `<Route path element>`:** Routes is the switchboard. It looks at the address and shows the ONE Route whose `path` matches, rendering its `element`.
+- **`Link to="/favorites"`:** React Router's version of `<a href>`. It changes the address and swaps the page **without reloading**, so the app keeps its state.
+- **SPA (single-page app):** one real HTML page whose content React swaps. That's why `Link` matters: an `<a>` would reload the whole app.
+- **`useNavigate()`:** go to another page from code (e.g. after a form is submitted).
+- **`useParams()`:** reads the `:variable` parts of the path. `/recipe/53495` → `{ recipeId: "53495" }`. The name must match the `:name` in App.tsx.
+- **`useSearchParams()`:** reads the query string (after the `?`). `searchParams.get("query")`.
+- **Default value in destructuring:** `const { categoryName = "" } = useParams()` = "use empty text if it's missing."
+- **Form submit + `event.preventDefault()`:** forms reload the page by default. preventDefault = "don't do the default thing."
+- **Controlled input:** `value={searchText}` + `onChange={...}`. React holds the text, so React is "in control" of the box.
+- **`SyntheticEvent`:** React's wrapper around the browser's event, so it works the same in every browser. "Synthetic" = man-made.
+- **Deprecated (strikethrough in VS Code):** still works, but the makers want you to use something newer.
+- **camelCase vs PascalCase:** `searchText` (variables/functions) vs `RecipeCard` (components). React treats capitalized tags as components and lowercase tags as HTML.
+- **Case-sensitive:** `SearchText` and `searchText` are different names to JavaScript.
 - **My list of places a user can go (Aubrey's brainstorm → becomes the routes):**
   | What the user is doing | Page | URL (route) |
   |---|---|---|

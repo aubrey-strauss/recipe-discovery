@@ -4,10 +4,12 @@ import useFetch from "../hooks/useFetch";
 import type { RecipeResponse } from "../types/Recipe";
 import getIngredients from "../utils/getIngredients";
 import { useFavorites } from "../context/FavoritesContext";
+import { useParams } from "react-router-dom";
 
 function RecipeDetailPage() {
   // Hardcoded for now; the URL will supply this once routes are added
-  const recipeId = "52772";
+  // Read :recipeId from the address (e.g. /recipe/52772 → "52772")
+  const { recipeId = "" } = useParams();
 
   // Ask the API for one recipe by its ID
   const { data, loading, error } = useFetch<RecipeResponse>(
