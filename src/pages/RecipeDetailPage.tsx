@@ -3,6 +3,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import useFetch from "../hooks/useFetch";
 import type { RecipeResponse } from "../types/Recipe";
 import getIngredients from "../utils/getIngredients";
+import { useFavorites } from "../context/FavoritesContext";
 
 function RecipeDetailPage() {
   // Hardcoded for now; the URL will supply this once routes are added
@@ -12,6 +13,8 @@ function RecipeDetailPage() {
   const { data, loading, error } = useFetch<RecipeResponse>(
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`,
   );
+
+  const { isFavorite, addFavorite, removeFavorite } = useFavorites();
 
   if (loading) return <Spinner message="Loading recipe..." />;
   if (error) return <ErrorMessage message={error} />;
@@ -24,6 +27,8 @@ function RecipeDetailPage() {
 
   // Turn the 40 ingredient/measure fields into one clean list
   const ingredients = getIngredients(recipe);
+  // Is this recipe already saved? (true or false)
+  const saved = isFavorite(recipe.idMeal);
 
   return (
     <section>
@@ -32,7 +37,13 @@ function RecipeDetailPage() {
       <p>
         Category: {recipe.strCategory} · Area: {recipe.strArea}
       </p>
-
+      <button
+        onClick={() =>
+          saved ? removeFavorite(recipe.idMeal) : addFavorite(recipe.idMeal)
+        }
+      >
+        {saved ? "Remove from Favorites" : "Add to Favorites"}
+      </button>
       <h2>Ingredients</h2>
       <ul>
         {ingredients.map((item, index) => (

@@ -164,13 +164,48 @@ For learning: what words mean, why they're called that, and why we did each step
 - **API data can change:** I expected 3 fields per meal from `filter.php`, but the real data had 5 (`strArea` and `strCountry` too). Always check the real data in the browser and build the type from what you see, not from notes or old examples.
 - **`null`:** a value that means "nothing here on purpose." `"strArea": null` means the API knows about the field but has no value for this meal.
 - **`string | null`:** the `|` means "or." So `strArea: string | null` = "this is text OR nothing." It's called a **union type** because it unites two types into one. TypeScript will then remind me to handle the "nothing" case before using it.
-- **Custom hook:** my own reusable function built from React hooks (`useState`, `useEffect`). Write the tricky code once, use it on every page in one line. Called a "hook" because it lets a component *hook into* React features. Name MUST start with `use` so React knows it's a hook and checks the Rules of Hooks.
-- **Generic `<T>`:** a placeholder for a type, filled in later. `useFetch<CategoriesResponse>(url)` means "this time, the data looks like CategoriesResponse." Called *generic* because the hook works for types *in general*, not one specific type. (T = "Type," just a tradition.)
+- **Custom hook:** my own reusable function built from React hooks (`useState`, `useEffect`). Write the tricky code once, use it on every page in one line. Called a "hook" because it lets a component *hook into* React features. Name MUST start with `use`.
+- **Generic `<T>`:** a placeholder for a type, filled in later. `useFetch<CategoriesResponse>(url)` means "this time, the data looks like CategoriesResponse." Called *generic* because it works for types *in general*. (T = "Type.")
 - **Dependency array `[url]`:** the list at the end of `useEffect`. React re-runs the effect when anything in it changes. `[]` = run once; `[url]` = run again when the URL changes.
-- **Cleanup function:** the function returned from `useEffect`. React runs it when the component goes away or before the effect runs again. Used here to flip `ignore = true` so a late answer from an old URL doesn't overwrite the page.
-- **`?.` (optional chaining):** `data?.categories` = "only look inside `data` if it isn't null/undefined." Called *chaining* because you chain `.something` lookups; *optional* because each step is allowed to be empty.
-- **`??` (nullish coalescing):** `x ?? []` = "use `x`, but if it's null/undefined, use `[]` instead." *Nullish* = null-ish (null or undefined). *Coalescing* = merging into one value.
-- **Response type vs item type:** `Category` = one item. `CategoriesResponse` = the whole answer the API sends (`{ categories: Category[] }`). The hook needs the whole-answer shape.
+- **Cleanup function:** the function returned from `useEffect`. React runs it when the component goes away or before the effect runs again. Here it flips `ignore = true` so a late answer doesn't overwrite the page.
+- **`?.` (optional chaining):** `data?.categories` = "only look inside `data` if it isn't null/undefined."
+- **`??` (nullish coalescing):** `x ?? []` = "use `x`, but if it's null/undefined, use `[]` instead." *Nullish* = null-ish. *Coalescing* = merging into one value.
+- **Response type vs item type:** `Category` = one item. `CategoriesResponse` = the whole answer the API sends (`{ categories: Category[] }`).
+- **Template literal:** a string in backticks with fill-in-the-blank slots: `` `...filter.php?c=${categoryName}` ``. "Template" because it's a pattern with blanks; "literal" because it's text written right in the code.
+- **Refactor:** changing how code is written without changing what it does (HomePage looked the same after switching to `useFetch`).
+
+### Phase 5: Recipe detail page
+- **`extends`:** `interface Recipe extends RecipeSummary` = "start with everything RecipeSummary has, then add more." Reuse instead of retyping.
+- **Index signature `[key: string]: string | null`:** "any other field name is allowed, and its value is text or null." Lets me look up `recipe["strIngredient5"]` without typing all 40 fields. Named after an index in a book: look things up by name.
+- **`[0]`:** the first item in a list. Lists count from 0. `data?.meals?.[0]` = "the first meal, if there is one."
+- **`!` (not):** `if (!recipe)` = "if there is no recipe."
+- **`utils/` folder:** short for *utilities*, small helper functions that aren't components or hooks.
+- **`for` loop:** `for (let i = 1; i <= 20; i++)` repeats the code for i = 1, 2, 3 ... 20. `i++` = add 1 each time.
+- **Square-bracket lookup:** `recipe[`strIngredient${i}`]` builds the field name while the code runs, then looks it up.
+- **`.trim()`:** removes spaces from the start and end of text, so `" "` becomes `""` (empty).
+- **`.push()`:** adds one item to the end of a list.
+- **`<ul>` / `<li>`:** *unordered list* (bullets) / *list item*.
+- **Inline style `style={{ whiteSpace: "pre-line" }}`:** outer `{}` = "JavaScript here," inner `{}` = the style object. `pre-line` keeps the line breaks in the text.
+- **Index as key:** OK only when the list never reorders or changes (like a recipe's ingredients).
+
+### Phase 6: Favorites (global state)
+- **localStorage:** a small storage box the browser keeps for each website. It survives refreshes and closing the browser. "Local" = on your computer, not a server. Holds **text only**.
+- **`JSON.stringify` / `JSON.parse`:** turn a list into text to save it / turn saved text back into a list. *Stringify* = make it a string.
+- **Lazy initial state `useState(() => ...)`:** giving useState a *function* means "run this only once, at the start." *Lazy* because it waits and only does the work when needed.
+- **`? :` (ternary):** a shortcut if/else: `condition ? ifYes : ifNo`. *Ternary* = has three parts.
+- **`as const`:** keeps a returned pair's order and types fixed, so `[value, setValue]` works like useState's.
+- **Context:** a "bulletin board" for the whole app. One component pins data on it, and any component inside can read it. No passing props through every level (that's called **prop drilling**).
+- **Provider:** the component that pins the data on the board (`<FavoritesContext.Provider value={...}>`). It *provides* the value to everything inside it.
+- **`children`:** whatever you put between a component's opening and closing tags. `<FavoritesProvider><App /></FavoritesProvider>` makes `<App />` the children.
+- **Named vs default export:** `export function X` = named (import with `{ X }`); `export default X` = default (import without braces). A file can have many named exports but only one default.
+- **`.includes()`:** "is this in the list?" → true/false.
+- **Spread `...`:** `[...favorites, id]` = a new list with all the old items spread out, plus one more.
+- **`.filter()`:** makes a new list, keeping only items that pass a test. `!==` = "is not equal to."
+- **Why new lists?** React only notices a change when it gets a *new* list, not when an old one is changed in place.
+- **Rules of Hooks:** call hooks at the top of the component, in the same order every time, never after an early `return` or inside an `if`. That's why `useFavorites()` sits above `if (loading)`.
+- **`onClick={() => ...}`:** "do this when clicked." The arrow function wraps the action so it waits for the click instead of running immediately while drawing.
+- **"Too many re-renders":** React's error when something changes state *while drawing*, which causes a redraw, which changes state again... forever.
+- **Green "U" in VS Code:** *Untracked*. A new file Git hasn't saved in a commit yet. Goes away after `git add` + commit. (An "M" = Modified.)
 
 ### Phase 9: Routing (notes saved for later)
 - **My list of places a user can go (Aubrey's brainstorm → becomes the routes):**
