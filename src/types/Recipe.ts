@@ -7,6 +7,20 @@ export interface RecipeSummary {
   strCountry: string | null;
 }
 
-export interface RecipeResonse {
+// A LIST of recipes (category, search) wrapped in "meals" (null when nothing matches)
+export interface RecipesResponse {
   meals: RecipeSummary[] | null;
+}
+
+// The full recipe that lookup.php sends back
+export interface Recipe extends RecipeSummary {
+  strCategory: string | null;
+  strInstructions: string | null;
+  // Lets us read strIngredient1–20 and strMeasure1–20 without typing all 40
+  [key: string]: string | null;
+}
+
+// ONE recipe (lookup) wrapped in a "meals" list
+export interface RecipeResponse {
+  meals: Recipe[] | null;
 }

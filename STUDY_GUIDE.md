@@ -164,6 +164,13 @@ For learning: what words mean, why they're called that, and why we did each step
 - **API data can change:** I expected 3 fields per meal from `filter.php`, but the real data had 5 (`strArea` and `strCountry` too). Always check the real data in the browser and build the type from what you see, not from notes or old examples.
 - **`null`:** a value that means "nothing here on purpose." `"strArea": null` means the API knows about the field but has no value for this meal.
 - **`string | null`:** the `|` means "or." So `strArea: string | null` = "this is text OR nothing." It's called a **union type** because it unites two types into one. TypeScript will then remind me to handle the "nothing" case before using it.
+- **Custom hook:** my own reusable function built from React hooks (`useState`, `useEffect`). Write the tricky code once, use it on every page in one line. Called a "hook" because it lets a component *hook into* React features. Name MUST start with `use` so React knows it's a hook and checks the Rules of Hooks.
+- **Generic `<T>`:** a placeholder for a type, filled in later. `useFetch<CategoriesResponse>(url)` means "this time, the data looks like CategoriesResponse." Called *generic* because the hook works for types *in general*, not one specific type. (T = "Type," just a tradition.)
+- **Dependency array `[url]`:** the list at the end of `useEffect`. React re-runs the effect when anything in it changes. `[]` = run once; `[url]` = run again when the URL changes.
+- **Cleanup function:** the function returned from `useEffect`. React runs it when the component goes away or before the effect runs again. Used here to flip `ignore = true` so a late answer from an old URL doesn't overwrite the page.
+- **`?.` (optional chaining):** `data?.categories` = "only look inside `data` if it isn't null/undefined." Called *chaining* because you chain `.something` lookups; *optional* because each step is allowed to be empty.
+- **`??` (nullish coalescing):** `x ?? []` = "use `x`, but if it's null/undefined, use `[]` instead." *Nullish* = null-ish (null or undefined). *Coalescing* = merging into one value.
+- **Response type vs item type:** `Category` = one item. `CategoriesResponse` = the whole answer the API sends (`{ categories: Category[] }`). The hook needs the whole-answer shape.
 
 ### Phase 9: Routing (notes saved for later)
 - **My list of places a user can go (Aubrey's brainstorm → becomes the routes):**
