@@ -17,9 +17,12 @@ function FavoritesPage() {
   return (
     <section>
       <h1>Favorites</h1>
-      {favorites.map((id) => (
-        <FavoriteItem key={id} id={id} />
-      ))}
+      <div className="card-grid">
+        {/* favorites is a list of saved recipe IDs; each FavoriteItem looks up its own recipe */}
+        {favorites.map((id) => (
+          <FavoriteItem key={id} id={id} />
+        ))}
+      </div>
     </section>
   );
 }

@@ -28,9 +28,11 @@ function SearchPage() {
   return (
     <section>
       <h1>Search results for "{query}"</h1>
-      {recipes.map((recipe) => (
-        <RecipeCard key={recipe.idMeal} recipe={recipe} />
-      ))}
+      <div className="card-grid">
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.idMeal} recipe={recipe} />
+        ))}
+      </div>
     </section>
   );
 }

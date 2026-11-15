@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <defs>
+    <!-- dark green background, a little lighter in the middle so the title pops -->
+    <radialGradient id="bg" cx="0.5" cy="0.5" r="0.75">
+      <stop offset="0" stop-color="#2B3A31"/>
+      <stop offset="1" stop-color="#151D18"/>
+    </radialGradient>
+
+    <!-- ROSEMARY SPRIG -->
+    <symbol id="rosemary" viewBox="0 0 60 200">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M30,198 Q26,100 34,4"/>
+        <path d="M31,20 Q22,17 15,9 M31,20 Q40,17 47,9
+                 M31,34 Q22,31 15,23 M31,34 Q40,31 47,23
+                 M31,48 Q22,45 15,37 M31,48 Q40,45 47,37
+                 M31,62 Q22,59 15,51 M31,62 Q40,59 47,51
+                 M30,76 Q21,73 14,65 M30,76 Q39,73 46,65
+                 M30,90 Q21,87 14,79 M30,90 Q39,87 46,79
+                 M29,104 Q20,101 13,93 M29,104 Q38,101 45,93
+                 M29,118 Q20,115 13,107 M29,118 Q38,115 45,107
+                 M29,132 Q20,129 13,121 M29,132 Q38,129 45,121
+                 M29,146 Q20,143 14,135 M29,146 Q38,143 44,135
+                 M29,160 Q21,157 16,150 M29,160 Q37,157 42,150"/>
+      </g>
+    </symbol>
+
+    <!-- GARLIC BULB -->
+    <symbol id="garlic" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M48,16 L50,3 L52,16"/>
+        <path d="M50,15 Q52,30 70,40 Q90,55 80,78 Q70,95 50,95 Q30,95 20,78 Q10,55 30,40 Q48,30 50,15Z"/>
+        <path d="M50,30 Q40,60 45,94 M50,30 Q60,60 55,94 M38,42 Q25,65 32,88 M62,42 Q75,65 68,88"/>
+        <path d="M44,95 L42,99 M50,95 L50,100 M56,95 L58,99"/>
+      </g>
+    </symbol>
+
+    <!-- LEMON HALF -->
+    <symbol id="lemon" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="50" cy="50" r="44"/>
+        <circle cx="50" cy="50" r="38"/>
+        <circle cx="50" cy="50" r="3"/>
+        <path d="M50,47 L50,14 M52,48 L75,25 M53,50 L86,50 M52,52 L75,75
+                 M50,53 L50,86 M48,52 L25,75 M47,50 L14,50 M48,48 L25,25"/>
+      </g>
+    </symbol>
+
+    <!-- BAY LEAF -->
+    <symbol id="bay" viewBox="0 0 60 110">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path d="M30,4 Q58,45 30,106 Q2,45 30,4Z"/>
+        <path d="M30,10 L30,104 M30,30 L42,22 M30,30 L18,22 M30,50 L46,40 M30,50 L14,40 M30,70 L44,62 M30,70 L16,62"/>
+      </g>
+    </symbol>
+
+    <!-- STAR ANISE -->
+    <symbol id="anise" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="1.6">
+        <g id="petal">
+          <path d="M50,48 Q41,30 50,8 Q59,30 50,48Z"/>
+          <ellipse cx="50" cy="28" rx="2.5" ry="5"/>
+        </g>
+        <use href="#petal" transform="rotate(45 50 50)"/>
+        <use href="#petal" transform="rotate(90 50 50)"/>
+        <use href="#petal" transform="rotate(135 50 50)"/>
+        <use href="#petal" transform="rotate(180 50 50)"/>
+        <use href="#petal" transform="rotate(225 50 50)"/>
+        <use href="#petal" transform="rotate(270 50 50)"/>
+        <use href="#petal" transform="rotate(315 50 50)"/>
+        <circle cx="50" cy="50" r="4"/>
+      </g>
+    </symbol>
+
+    <!-- OLIVE BRANCH -->
+    <symbol id="olive" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+        <path d="M5,95 Q40,70 60,40 Q75,18 95,5"/>
+        <ellipse cx="22" cy="76" rx="3.5" ry="11" transform="rotate(-20 22 76)"/>
+        <ellipse cx="30" cy="88" rx="3.5" ry="11" transform="rotate(70 30 88)"/>
+        <ellipse cx="38" cy="62" rx="3.5" ry="11" transform="rotate(-10 38 62)"/>
+        <ellipse cx="50" cy="72" rx="3.5" ry="11" transform="rotate(75 50 72)"/>
+        <ellipse cx="52" cy="48" rx="3.5" ry="11" transform="rotate(-5 52 48)"/>
+        <ellipse cx="64" cy="54" rx="3.5" ry="11" transform="rotate(80 64 54)"/>
+        <ellipse cx="64" cy="30" rx="3.5" ry="11" transform="rotate(10 64 30)"/>
+        <ellipse cx="76" cy="36" rx="3.5" ry="11" transform="rotate(85 76 36)"/>
+        <ellipse cx="78" cy="18" rx="3.5" ry="11" transform="rotate(20 78 18)"/>
+        <ellipse cx="88" cy="22" rx="3.5" ry="10" transform="rotate(95 88 22)"/>
+      </g>
+      <ellipse cx="44" cy="82" rx="4" ry="5" fill="#C9A96E" opacity="0.85"/>
+      <ellipse cx="72" cy="48" rx="4" ry="5" fill="#C9A96E" opacity="0.85"/>
+    </symbol>
+
+    <!-- WHISK -->
+    <symbol id="whisk" viewBox="0 0 60 120">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M26,118 L26,74 Q30,70 34,74 L34,118 Q30,121 26,118Z"/>
+        <path d="M30,72 C0,50 6,4 30,4 C54,4 60,50 30,72"/>
+        <path d="M30,72 C12,50 16,6 30,4 C44,6 48,50 30,72"/>
+        <path d="M30,72 C24,50 26,8 30,4 C34,8 36,50 30,72"/>
+        <circle cx="30" cy="112" r="2"/>
+      </g>
+    </symbol>
+
+    <!-- CHILI PEPPER -->
+    <symbol id="chili" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M28,30 Q60,26 76,52 Q90,80 74,96 Q74,74 58,58 Q42,44 26,42 Q20,36 28,30Z"/>
+        <path d="M27,31 Q18,26 17,14 Q24,19 27,28"/>
+        <path d="M40,36 Q60,38 70,56"/>
+      </g>
+    </symbol>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="400" fill="url(#bg)"/>
+
+  <!-- thin gold frame with small diamonds in the corners -->
+  <rect x="18" y="18" width="1164" height="364" fill="none" stroke="#C9A96E" stroke-width="1" opacity="0.45"/>
+  <g fill="#C9A96E" opacity="0.7">
+    <path d="M18,12 L24,18 L18,24 L12,18Z"/>
+    <path d="M1182,12 L1188,18 L1182,24 L1176,18Z"/>
+    <path d="M18,376 L24,382 L18,388 L12,382Z"/>
+    <path d="M1182,376 L1188,382 L1182,388 L1176,382Z"/>
+  </g>
+
+  <!-- LEFT SIDE -->
+  <use href="#rosemary" x="70" y="25" width="120" height="340" color="#8FA58A" transform="rotate(-28 130 195)"/>
+  <use href="#lemon" x="250" y="60" width="105" height="105" color="#E8DCC4"/>
+  <use href="#garlic" x="175" y="225" width="115" height="115" color="#E8DCC4" transform="rotate(-8 232 282)"/>
+  <use href="#bay" x="320" y="225" width="60" height="110" color="#8FA58A" transform="rotate(40 350 280)"/>
+  <use href="#bay" x="45" y="270" width="45" height="82" color="#8FA58A" transform="rotate(-55 67 311)"/>
+  <use href="#anise" x="345" y="165" width="52" height="52" color="#C9A96E"/>
+
+  <!-- RIGHT SIDE -->
+  <use href="#olive" x="940" y="30" width="215" height="215" color="#8FA58A"/>
+  <use href="#whisk" x="820" y="175" width="100" height="200" color="#E8DCC4" transform="rotate(25 870 275)"/>
+  <use href="#chili" x="975" y="235" width="120" height="120" color="#C07A5A" transform="rotate(-20 1035 295)"/>
+  <use href="#anise" x="1095" y="285" width="62" height="62" color="#C9A96E"/>
+  <use href="#anise" x="840" y="55" width="46" height="46" color="#C9A96E"/>
+
+  <!-- scattered peppercorns -->
+  <g fill="#C9A96E" opacity="0.75">
+    <circle cx="225" cy="190" r="3"/><circle cx="236" cy="198" r="2.5"/><circle cx="220" cy="204" r="2.5"/>
+    <circle cx="410" cy="80" r="2.5"/><circle cx="398" cy="300" r="3"/>
+    <circle cx="905" cy="150" r="3"/><circle cx="915" cy="160" r="2.5"/><circle cx="898" cy="164" r="2.5"/>
+    <circle cx="795" cy="330" r="2.5"/><circle cx="1150" cy="240" r="3"/><circle cx="800" cy="70" r="2.5"/>
+  </g>
+</svg>

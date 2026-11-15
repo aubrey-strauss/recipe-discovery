@@ -18,10 +18,11 @@ function CategoryPage() {
   return (
     <section>
       <h1>{categoryName}</h1>
-      {recipes.map((recipe) => (
-        // idMeal is unique, so it's a safe key
-        <RecipeCard key={recipe.idMeal} recipe={recipe} />
-      ))}
+      <div className="card-grid">
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe.idMeal} recipe={recipe} />
+        ))}
+      </div>
     </section>
   );
 }

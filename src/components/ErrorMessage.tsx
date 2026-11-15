@@ -5,7 +5,7 @@ interface ErrorMessageProps {
 function ErrorMessage({
   message = "An unknown error occurred",
 }: ErrorMessageProps) {
-  return <div>Error: {message}</div>;
+  return <div className="status status-error">Error: {message}</div>;
 }
 
 export default ErrorMessage;

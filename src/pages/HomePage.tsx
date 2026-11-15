@@ -18,14 +18,20 @@ function HomePage() {
   const categories = data?.categories ?? [];
 
   return (
-    <section>
-      <h1>Home Page</h1>
-      {/* .map() goes through a list one item at a time and turns each item into something new */}
-      {categories.map((category) => (
-        // key = React's name tag for each card; must be unique, so we use the ID
-        <CategoryCard key={category.idCategory} category={category} />
-      ))}
-    </section>
+    <>
+      {/* BANNER: the one with the title gets "hero" */}
+      <section className="hero">
+        <h1>Aubrey's Apron</h1>
+        <p>Find your next favorite meal</p>
+      </section>
+
+      {/* CARDS: the one with categories.map gets "card-grid" */}
+      <section className="card-grid">
+        {categories.map((category) => (
+          <CategoryCard key={category.idCategory} category={category} />
+        ))}
+      </section>
+    </>
   );
 }
 

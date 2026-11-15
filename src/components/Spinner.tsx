@@ -3,7 +3,7 @@ interface SpinnerProps {
 }
 
 function Spinner({ message = "Loading..." }: SpinnerProps) {
-  return <div>{message}</div>;
+  return <div className="status">{message}</div>;
 }
 
 export default Spinner;

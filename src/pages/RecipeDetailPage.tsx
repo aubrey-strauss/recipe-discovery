@@ -33,13 +33,14 @@ function RecipeDetailPage() {
   const saved = isFavorite(recipe.idMeal);
 
   return (
-    <section>
+    <section className="recipe-detail">
       <h1>{recipe.strMeal}</h1>
       <img src={recipe.strMealThumb} alt={recipe.strMeal} />
       <p>
         Category: {recipe.strCategory} · Area: {recipe.strArea}
       </p>
       <button
+        className="btn"
         onClick={() =>
           saved ? removeFavorite(recipe.idMeal) : addFavorite(recipe.idMeal)
         }

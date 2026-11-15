@@ -1,29 +1,38 @@
 import { useState, type SyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 function Navbar() {
-  const [SearchText, setSearchText] = useState("");
+  // Remembers what the user has typed so far
+  const [searchText, setSearchText] = useState("");
+  // Lets us send the user to another page from code
   const navigate = useNavigate();
 
   function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
+    // Stop the browser's default "reload the page" on submit
     event.preventDefault();
-    const word = SearchText.trim();
-    // ignore empty searches
+    const word = searchText.trim();
+    // Ignore empty searches
     if (!word) return;
-    // go to the search page with the word in the address
+    // Go to the search page with the word in the address
     navigate(`/search?query=${encodeURIComponent(word)}`);
   }
+
   return (
-    <nav>
+    <nav className="navbar">
       {/* Clicking the app name goes home, like most websites */}
       <Link to="/">
-        <h2>Recipe Discovery</h2>
+        <h2>Aubrey's Apron</h2>
       </Link>
-      <Link to="/">Home</Link> | <Link to="/favorites">Favorites</Link>
+      {/* Wrapped together so CSS can put them side by side */}
+      <div className="navbar-links">
+        <Link to="/">Home</Link>
+        <Link to="/favorites">Favorites</Link>
+      </div>
       {/* onSubmit runs on Enter or on clicking the button */}
-      <form onSubmit={handleSubmit}>
+      <form className="search-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          value={SearchText}
+          value={searchText}
           onChange={(event) => setSearchText(event.target.value)}
           placeholder="Search recipes..."
         />

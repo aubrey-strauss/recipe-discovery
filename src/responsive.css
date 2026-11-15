@@ -1,0 +1,67 @@
+/* ========== SMALL SCREENS (tablets and phones) ========== */
+/* Everything inside this block ONLY applies when the screen is 768px wide or less.
+   Rules in here override the same rules from above. */
+@media (max-width: 768px) {
+  /* Navbar: stack the 3 parts on top of each other instead of side by side */
+  .navbar {
+    grid-template-columns: 1fr; /* just 1 column now */
+    justify-items: center; /* center each part */
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .navbar-links {
+    font-size: 1.25rem;
+    gap: 1.5rem;
+  }
+
+  /* Search form stretches across the screen */
+  .search-form {
+    justify-self: stretch;
+  }
+
+  .search-form input {
+    width: auto; /* drop the fixed 280px */
+    flex: 1; /* take up whatever space the button doesn't */
+    min-width: 0; /* lets it shrink on very narrow screens */
+  }
+
+  /* Banner: shorter, with smaller text */
+  .hero {
+    min-height: 260px;
+    padding: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+  }
+
+  /* Less empty space around the page content */
+  main section:not(.hero) {
+    padding: 2rem 1rem;
+  }
+
+  main section:not(.hero) > h1 {
+    font-size: 1.8rem;
+  }
+
+  /* Smaller cards, so 2 fit side by side on a phone */
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .category-card img {
+    height: 100px;
+  }
+
+  /* Ingredients in 1 column instead of 2 */
+  .recipe-detail ul {
+    columns: 1;
+  }
+}
+

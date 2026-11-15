@@ -119,3 +119,20 @@ Jot things down as they happen. Raw notes are fine.
 - **404 catch-all:** `path="*"` listed last shows NotFoundPage for any unknown address.
 - **One toggle button:** instead of two buttons, one button flips its words and action based on `isFavorite`.
 - **Folder structure:** split code into `pages`, `components`, `hooks`, `context`, `types`, and `utils` so each kind of code has one home.
+
+### Styling and help from Claude (AI)
+- **What I started with:** I had basic CSS for the page. I asked Claude (an AI assistant) for help with
+  the parts below, and Claude made these changes for me.
+- **Chicken category image:** the API's Chicken photo showed raw chicken, which I didn't like. Claude cut
+  the plate out of a photo of cooked chicken I chose (removed the table, fork and knife), added a soft plate
+  shadow, and saved it as `public/chicken.png` with a see-through background so it blends into the cards.
+  Claude also changed `CategoryCard.tsx` so it checks a `customImages` list first, then falls back to the
+  API's photo (`??`), so only the Chicken card uses my picture.
+- **Descriptions expand on hover:** Claude changed the CSS so each category card shows only the first
+  3 lines of its description (`-webkit-line-clamp: 3`), and on hover (or keyboard focus) the full
+  description fades in on a dark panel over the card (`position: absolute; inset: 0`), so the grid
+  doesn't jump around.
+- **Also made with Claude's help:** the line-art hero banner image (`public/elegant-hero.svg`), the
+  matching navbar/search box styles, the card grid, and the page colors and fonts. Claude also helped
+  me debug: a blank page caused by `imageSrc` being placed outside the component function, where
+  `category` doesn't exist.

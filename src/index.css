@@ -1,8 +1,317 @@
+.hero {
+  background-image: url("/elegant-hero.svg");
+  background-size: cover;
+  background-position: center;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: "Playfair Display", serif;
+  color: #e8dcc4; /* cream */
+  font-size: 5rem;
+  letter-spacing: 0.05em; /* spreads the letters out a little */
+  margin: 0;
+}
+
+.hero p {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  color: #c9a96e; /* gold */
+  font-size: 2.5rem;
+}
+.navbar {
+  background-color: #151d18; /* same dark green as the banner's edges */
+  border-bottom: 1px solid #c9a96e; /* thin gold line, like the banner frame */
+  justify-content: space-between; /* pushes them apart: left, middle, right */
+  align-items: center; /* lines them up vertically */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* left | middle | right */
+  align-items: center;
+  padding: 1rem 3rem;
+}
+
+.navbar a {
+  color: #e8dcc4; /* cream links */
+  text-decoration: none; /* removes the underline */
+}
+
+.navbar h2 {
+  font-family: "Playfair Display", serif;
+  margin: 0;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem; /* space between Home and Favorites */
+  font-size: 2rem;
+}
+
+/* Search box and button side by side with a little space between */
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+  justify-self: end;
+}
+
+/* The box you type in */
+.search-form input {
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  width: 280px; /* makes it wider */
+  padding: 0.6rem 1rem; /* makes it taller and roomier inside */
+  background-color: rgba(0, 0, 0, 0.25); /* see-through dark tint */
+  color: #e8dcc4; /* cream text as you type */
+  border: 1px solid #c9a96e; /* thin gold outline */
+  border-radius: 999px; /* rounded pill shape */
+}
+
+/* The "Search recipes..." hint text */
+.search-form input::placeholder {
+  color: #e8dcc4;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* Gold outline glow when you click into the box */
+.search-form input:focus {
+  outline: none;
+  border-color: #e8dcc4;
+  box-shadow: 0 0 0 2px rgba(201, 169, 110, 0.4);
+}
+
+/* The Search button */
+.search-form button {
+  font-family: inherit; /* same font as the navbar */
+  font-size: 1rem;
+  padding: 0.6rem 1.4rem;
+  background-color: #c9a96e; /* gold */
+  color: #151d18; /* dark green text */
+  border: none;
+  border-radius: 999px;
+  cursor: pointer; /* hand pointer on hover */
+}
+
+.search-form button:hover {
+  background-color: #e8dcc4; /* turns cream on hover */
+}
+
+/* ========== WHOLE PAGE ========== */
+
+/* Makes width include padding and borders, so sizes add up the way you'd expect */
 * {
   box-sizing: border-box;
 }
 
 body {
-  margin: 0;
+  margin: 0; /* removes the browser's white gap around the page */
+  background-color: #f7f1e6; /* warm cream */
+  color: #1f2a24; /* dark green text */
   font-family: system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+/* Every page section except the banner: centered with a max width */
+main section:not(.hero) {
+  max-width: 1200px;
+  margin: 0 auto; /* "auto" on left and right centers it */
+  padding: 3rem 2rem;
+}
+
+main h1,
+main h2 {
+  font-family: "Playfair Display", serif;
+}
+
+/* Page titles (not the banner title) */
+main section:not(.hero) > h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+/* Short gold line under each page title */
+main section:not(.hero) > h1::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 2px;
+  background-color: #c9a96e;
+  margin: 1rem auto 2.5rem;
+}
+
+/* ========== CARD GRID ========== */
+
+.card-grid {
+  display: grid;
+  /* each card at least 220px wide: room for the description text */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ========== CARDS ========== */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fffdf8;
+  border: 1px solid #e5d9c3;
+  border-radius: 12px;
+  overflow: hidden; /* clips the photo to the rounded corners */
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+/* Lifts up slightly when you hover */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(21, 29, 24, 0.12);
+  border-color: #c9a96e;
+}
+
+/* Recipe photos: fill the top of the card */
+.card img {
+  order: -1; /* always put the photo first, at the top */
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+/* Category photos: smaller, and the WHOLE picture shows (no cut-off edges) */
+.category-card img {
+  aspect-ratio: auto; /* turn off the fixed shape from above */
+  height: 140px;
+  object-fit: contain; /* "contain" = fit the whole picture inside, nothing cut */
+  padding: 1rem 1rem 0;
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  margin: 0.75rem 1rem 0.5rem;
+}
+
+/* Category descriptions: show only the first 3 lines, ending in "..." */
+.card p {
+  margin: 0 1rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #5b6b60;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* how many lines show before the "..." */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* The card is the "anchor" the hover panel is positioned against */
+.category-card {
+  position: relative;
+}
+
+/* On hover (or when tabbed to with the keyboard), the full description
+   slides over the card as a dark panel. The card itself does not change size,
+   so the grid doesn't jump around. */
+.category-card:hover p,
+.category-card:focus-visible p {
+  position: absolute; /* lift it out of the card's normal layout... */
+  inset: 0; /* ...and stretch it to cover the whole card */
+  margin: 0;
+  padding: 1.25rem;
+  display: block;
+  -webkit-line-clamp: unset; /* show every line */
+  overflow-y: auto; /* scroll if it's still too long */
+  background-color: rgba(21, 29, 24, 0.94); /* dark green, slightly see-through */
+  color: #e8dcc4;
+  animation: fade-in 0.2s ease;
+}
+
+/* A quick fade so the panel doesn't just pop in */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* ========== RECIPE DETAIL PAGE ========== */
+
+main section.recipe-detail {
+  max-width: 800px; /* narrower is easier to read */
+}
+
+.recipe-detail img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* The "Category · Area" line */
+.recipe-detail > p:first-of-type {
+  text-align: center;
+  font-style: italic;
+  color: #6b705c;
+}
+
+.recipe-detail h2 {
+  border-bottom: 1px solid #e5d9c3;
+  padding-bottom: 0.5rem;
+  margin-top: 2.5rem;
+}
+
+/* Ingredients in 2 columns */
+.recipe-detail ul {
+  columns: 2;
+  padding-left: 1.2rem;
+}
+
+/* Gold bullet points */
+.recipe-detail li::marker {
+  color: #c9a96e;
+}
+
+/* ========== BUTTON ========== */
+
+.btn {
+  display: block;
+  margin: 1.5rem auto 0; /* centered */
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  padding: 0.7rem 1.8rem;
+  background-color: #1f2a24;
+  color: #e8dcc4;
+  border: 1px solid #c9a96e;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #c9a96e;
+  color: #1f2a24;
+}
+
+/* ========== LOADING AND ERROR MESSAGES ========== */
+
+.status {
+  text-align: center;
+  padding: 4rem 1rem;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #6b705c;
+}
+
+.status-error {
+  color: #8c2f39;
 }
